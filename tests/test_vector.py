@@ -47,7 +47,7 @@ def test_from_values(
     exp: Vector2D,
 ) -> None:
     """Test from values."""
-    assert exp == Vector2D(a, y)
+    assert exp == Vector2D(x, y)
 
 
 ####################
