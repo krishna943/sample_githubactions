@@ -69,7 +69,7 @@ jobs:
           docker compose -f docker-compose.yml up -d 
           echo ---Containers up---
       - name: Install Prisma
-        run: npm install @prisma/cli --save-dev
+        run: npm install prisma --save-dev
       - name: Start containers using docker-compose
         run: docker-compose -f docker-compose.yml up -d
       - name: Push DB schema using Prisma ORM
