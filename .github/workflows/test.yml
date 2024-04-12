@@ -44,7 +44,7 @@ on:
 
 jobs:
   build-linux:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-docker  # Use runner with pre-installed Docker
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.11
@@ -59,22 +59,13 @@ jobs:
       - name: Testing
         run: |
           python -m pytest --cov=fastvector tests
-      
-
-      - name: Set up Docker
-        uses: actions/setup-docker@v2
-
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-
       - name: Install Prisma
         run: npm install @prisma/cli --save-dev
-
       - name: Start containers using docker-compose
         run: docker-compose -f docker-compose.yml up -d
-
       - name: Push DB schema using Prisma ORM
         run: npx prisma migrate dev --name init --preview-feature
-
