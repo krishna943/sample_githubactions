@@ -44,7 +44,7 @@ on:
 
 jobs:
   build-linux:
-    runs-on: ubuntu-latest-docker  # Use runner with pre-installed Docker
+    runs-on: ubuntu-latest  # Use runner with pre-installed Docker
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.11
@@ -63,6 +63,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
+      - name: 'Set up db'
+        run: |
+          echo ---Building and starting up docker---
+          docker compose -f docker-compose.test.yml up -d --wait
+          echo ---Containers up---
       - name: Install Prisma
         run: npm install @prisma/cli --save-dev
       - name: Start containers using docker-compose
